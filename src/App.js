@@ -3,23 +3,45 @@ import Header from './Header';
 import Hero from './Hero';
 import Section from './Section';
 import Card from './Card';
+import Modal from './Modal';
 import gc2 from './assets/gc-2.jpg';
 import './App.css';
+import './Modal.css';
 
 const imagePaths = require
   .context('./assets/main-photos/', true, /\.(png|jpe?g|svg)$/)
   .keys()
   .map(i => i.replace('./', ''));
 
+const ImageModal = props => (
+  <Modal>
+    <div className="modal" onClick={props.toggleModal}>
+      <img style={{width: '75%'}} src={props.path} />
+    </div>
+  </Modal>
+);
+
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      modal: false,
+      path: ''
+    };
+  }
+  renderImageModal = (path = '') => {
+    this.setState(prevState => ({ modal: !prevState.modal, path: path }));
+  }
   render() {
     const renderImages = () => {
-      return imagePaths.map(i => (
-        <img
-          style={{ maxWidth: '100%' }}
-          src={require(`./assets/main-photos/${i}`)}
-        />
-      ));
+      return imagePaths.map(i => {
+        const path = require(`./assets/main-photos/${i}`);
+        return (
+          <div onClick={() => this.renderImageModal(path)}>
+            <img style={{ maxWidth: '100%' }} src={path} />
+          </div>
+        );
+      });
     };
     return (
       <div>
@@ -32,10 +54,19 @@ class App extends Component {
           </Card>
         </Section>
         <Section width="75%">
-          <div style={{ display: 'grid', gridAutoFlow: 'column', gridGap: '10px', maxWidth: '100%' }}>
+          <div
+            style={{
+              display: 'grid',
+              gridAutoFlow: 'column',
+              gridGap: '10px',
+              maxWidth: '100%'
+            }}
+          >
             {renderImages()}
           </div>
         </Section>
+        {this.state.modal &&
+          !!this.state.path && <ImageModal path={this.state.path} toggleModal={this.renderImageModal} />}
       </div>
     );
   }
