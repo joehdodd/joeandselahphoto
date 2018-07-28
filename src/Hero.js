@@ -4,7 +4,7 @@ import './Hero.css';
 const Hero = props => (
   <div className="hero-wrapper">
     <div className="hero-container">
-      <img className="hero-image" src={props.img}/>
+      <img className="hero-image" src={props.img} alt={props.alt} />
       <span className="hero-text">{props.mainText}</span>
     </div>
   </div>

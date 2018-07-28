@@ -16,7 +16,7 @@ const imagePaths = require
 const ImageModal = props => (
   <Modal>
     <div className="modal" onClick={props.toggleModal}>
-      <img style={{width: '75%'}} src={props.path} />
+      <img style={{width: '75%'}} src={props.path} alt={props.alt} />
     </div>
   </Modal>
 );
@@ -26,7 +26,8 @@ class App extends Component {
     super(props);
     this.state = {
       modal: false,
-      path: ''
+      path: '',
+      alt: 'Joe & Selah wedding and engagement photography'
     };
   }
   renderImageModal = (path = '') => {
@@ -34,11 +35,11 @@ class App extends Component {
   }
   render() {
     const renderImages = () => {
-      return imagePaths.map(i => {
-        const path = require(`./assets/main-photos/${i}`);
+      return imagePaths.map((img, i) => {
+        const path = require(`./assets/main-photos/${img}`);
         return (
-          <div onClick={() => this.renderImageModal(path)}>
-            <img style={{ maxWidth: '100%' }} src={path} />
+          <div key={i} onClick={() => this.renderImageModal(path)}>
+            <img style={{ maxWidth: '100%' }} src={path} alt={this.props.alt} />
           </div>
         );
       });
@@ -46,7 +47,7 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <Hero mainText="More Than Just Moments" img={gc2} />
+        <Hero mainText="More Than Just Moments" alt={this.props.alt} img={gc2} />
         <Section width="50%">
           <Card textAlign="center">
             We are Joe & Selah -- husband and wife wedding photographers on the
@@ -66,7 +67,7 @@ class App extends Component {
           </div>
         </Section>
         {this.state.modal &&
-          !!this.state.path && <ImageModal path={this.state.path} toggleModal={this.renderImageModal} />}
+          !!this.state.path && <ImageModal alt={this.props.alt} path={this.state.path} toggleModal={this.renderImageModal} />}
       </div>
     );
   }
