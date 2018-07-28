@@ -59,12 +59,20 @@ class App extends Component {
             style={{
               display: 'grid',
               gridAutoFlow: 'column',
+              gridTemplateRows: '1fr 1fr',
               gridGap: '10px',
               maxWidth: '100%'
             }}
           >
             {renderImages()}
           </div>
+        </Section>
+        <Section width="75%">
+          <h3>Send us a message!</h3>
+          <p>We'd love to learn about you and your wedding. Use the form below to give us the important details, and we'll be in touch with next steps.</p>
+          <form id="contact">
+            <input type="text"/>
+          </form>
         </Section>
         {this.state.modal &&
           !!this.state.path && <ImageModal alt={this.props.alt} path={this.state.path} toggleModal={this.renderImageModal} />}

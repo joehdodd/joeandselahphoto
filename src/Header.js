@@ -11,7 +11,7 @@ const Header = props => (
         <span>Home</span>
         <span>Stories</span>
         <span>About</span>
-        <span>Contact</span>
+        <span><a href="#contact">Contact</a></span>
       </div>
     </div>
   </div>
