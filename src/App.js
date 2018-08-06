@@ -50,8 +50,7 @@ class App extends Component {
         <Hero mainText="More Than Just Moments" alt={this.props.alt} img={gc2} />
         <Section width="50%">
           <Card textAlign="center">
-            We are Joe & Selah -- husband and wife wedding photographers on the
-            Eastern Shore of Maryland.
+            We are Joe & Selah -- husband and wife wedding photographers on the Eastern Shore of Maryland. Weddings represent two lives becoming one, and it's our pleasure to document the occassion. Those stories--you story--deserves to be told. We would be honored to tell it.  
           </Card>
         </Section>
         <Section width="75%">
